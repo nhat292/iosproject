@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import SVProgressHUD
+import Toast_Swift
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Init Toast message
+        var style = ToastStyle()
+        style.titleFont = UIFont.systemFont(ofSize: 15)
+        style.messageFont = UIFont.systemFont(ofSize: 14)
+        ToastManager.shared.style = style
+        ToastManager.shared.isTapToDismissEnabled = true
+        ToastManager.shared.position = .center
+        ToastManager.shared.duration = 1.5
+        ToastManager.shared.isQueueEnabled = false
+        
+        // Init progress HUD
+        SVProgressHUD.setForegroundColor(.lightGray)
+        SVProgressHUD.setRingRadius(3)
+
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = LaunchViewController()
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
